@@ -21,17 +21,31 @@ function invokeAction({ action, id, name, email, phone }) {
       break;
 
     case 'get':
-      // ... id
+      getContactById(id).then(contact => {
+        if(contact.length > 0) {
+          console.log(chalk.blue('Contact found'))
+          console.log(contact)
+        } else {
+          console.log(chalk.yellow('Contact not found lol(:'))
+        }
+      }).catch(console.error)
       break;
 
     case 'add':
         addContact(name, email, phone).then(contact => {
-            
+            console.log(chalk.green('Add new contact'))
             console.log(contact)}).catch(console.error)
       break;
 
     case 'remove':
-      // ... id
+      removeContact(id).then(contacts => {
+        if(contacts) {
+          console.log(chalk.white('contact deleted'))
+          console.log(contacts)
+        } else {
+          console.log(chalk.yellow('Contact not found'))
+        }
+      }).catch(console.error)
       break;
 
     default:
